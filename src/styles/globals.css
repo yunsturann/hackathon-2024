@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header_title {
+  @apply text-4xl font-bold text-left text-gray-800 dark:text-gray-100;
+}
+
+.header_desc {
+  @apply text-left text-base text-gray-600 dark:text-gray-300 mt-2;
+}
+
+.table_head {
+  @apply text-center border border-white tracking-wide font-semibold px-3 py-2;
+}
+
+.table_data {
+  @apply px-3 py-2 whitespace-nowrap border border-white dark:bg-gray-700;
+}
