@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // ** Nextjs Imports
 import Link from "next/link";
 
@@ -27,13 +28,13 @@ const Logo = ({ size }: LogoProps) => {
 
   return (
     <Link href={"/"} className="flex items-center gap-3" draggable>
-      {/* <Image
+      <img
         src="/images/logo.jpeg"
         alt="Company Logo"
         width={iconSize}
         height={iconSize}
         className="rounded-full"
-      /> */}
+      />
       <h2
         className={cn(
           "font-bold tracking-wide text-transparent bg-gradient-to-r bg-clip-text from-blue-400 to-green-600",

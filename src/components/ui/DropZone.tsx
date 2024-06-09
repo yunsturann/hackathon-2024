@@ -1,7 +1,7 @@
 // ** React Imports
 import { cn } from "@/lib/utils";
-import { ProductFormType } from "@/pages/product/create";
-import React, { FC, useState } from "react";
+import { ProductFormType } from "@/pages/products/create";
+import React, { FC } from "react";
 
 // ** Third Party Components
 
@@ -27,7 +27,7 @@ const CvDropzone: FC<CvDropzoneProps> = (props) => {
       return;
     }
     // check is the item an image file png or jpeg or jpg
-    console.log(files[0].type);
+
     if (
       files[0].type !== "image/png" &&
       files[0].type !== "image/jpeg" &&

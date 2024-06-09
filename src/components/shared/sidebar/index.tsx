@@ -15,14 +15,18 @@ import Button from "@/components/ui/Button";
 import { auth } from "@/config/firebase";
 import toast from "react-hot-toast";
 import AlertDialog from "@/components/ui/AlertDialog";
+import { useUserStore } from "@/store/use-user-store";
 
 const Sidebar = () => {
+  const setUser = useUserStore((state) => state.setUser);
+
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
 
   const handleLogout = async () => {
     try {
       await auth.signOut();
       toast.success("Logged out successfully");
+      setUser(null);
     } catch (error) {
       toast.error((error as Error).message);
     }

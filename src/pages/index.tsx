@@ -1,5 +1,6 @@
+import InfoCards from "@/components/homepage/InfoCards";
 import Container from "@/components/shared/Container";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Homepage = () => {
   return (
@@ -11,6 +12,11 @@ const Homepage = () => {
             Make product management easy with our platform.
           </p>
         </header>
+
+        {/* InfoCards */}
+        <Suspense fallback={<p>Loading...</p>}>
+          <InfoCards />
+        </Suspense>
       </Container>
     </section>
   );

@@ -95,3 +95,15 @@ export const onInputLatAndLng = (e: ChangeEvent<HTMLInputElement>) => {
     // Eksi işareti sadece başta olabilir
     .replace(/(.)-/g, "$1");
 };
+
+export const onInputRefund = (e: ChangeEvent<HTMLInputElement>) => {
+  e.target.value = e.target.value
+    // Sadece sayı ve nokta kabul et, eksi işareti hariç
+    .replace(/[^0-9.]+/g, "")
+    // Birden fazla noktayı engelle
+    .replace(/\.{2,}/g, ".")
+    // Noktadan sonra sadece 3 basamak kabul et
+    .replace(/(\.\d{3})\./g, "$1")
+    // Başta sıfır olup olmadığını kontrol et, varsa ve arkasında nokta yoksa kaldır
+    .replace(/^0([^.])/g, "$1");
+};

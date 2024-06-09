@@ -12,7 +12,10 @@ import * as yup from "yup";
 
 const schema = yup.object().shape({
   email: yup.string().email("Email is not valid").required("Email is required"),
-  password: yup.string().required("Password is required"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(6, "Password is too short"),
 });
 
 type TLoginForm = yup.InferType<typeof schema>;
@@ -35,7 +38,6 @@ const Login = () => {
   });
 
   const handleLogin = async ({ email, password }: TLoginForm) => {
-    console.log(email, password);
     try {
       await signInWithEmailAndPassword(auth, email, password);
 

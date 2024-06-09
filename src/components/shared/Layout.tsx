@@ -24,22 +24,21 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       } else if (authUser && publicPages.includes(router.pathname)) {
         router.push("/");
       } else if (
-        user?.user_type !== "admin" &&
-        router.pathname.includes("/admin")
+        user?.user_type === "company" &&
+        router.pathname.startsWith("/admin")
       ) {
-        router.push("/");
+        router.replace("/");
       } else if (
         user?.user_type === "admin" &&
         !router.pathname.startsWith("/admin")
       ) {
-        router.push("/admin");
+        router.replace("/admin");
       }
-
-      fetchUser(authUser?.uid || "");
+      if (user === null) fetchUser(authUser?.uid || "");
     });
 
     return () => sub();
-  }, [fetchUser, router, user?.user_type]);
+  }, [fetchUser, router, user?.user_type, user]);
 
   const inAuthPages = publicPages.includes(router.pathname);
 
@@ -48,7 +47,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <>
         <Toaster />
 
-        <div className="bg-gray-700 h-screen w-full flex items-center justify-center px-8">
+        <div className="bg-gray-700 min-h-screen w-full flex items-center justify-center p-8">
           <div className="w-full max-w-[600px] bg-white p-6 rounded-xl space-y-4">
             {children}
           </div>

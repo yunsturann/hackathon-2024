@@ -6,9 +6,11 @@ import SelectBox from "@/components/ui/SelectBox";
 import { db } from "@/config/firebase";
 import { productCategoryItems } from "@/constants";
 import uploadImage from "@/lib/uploadImage";
+import { onInputRefund } from "@/lib/utils";
 import { useUserStore } from "@/store/use-user-store";
 import { PRODUCT_CATEGORY } from "@/types/enums";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { create } from "domain";
 import { set } from "firebase/database";
 import { addDoc, collection } from "firebase/firestore";
 import React from "react";
@@ -78,6 +80,7 @@ const CreateProductPage = () => {
         ...data,
         company_id,
         image: imageUrl,
+        created_at: new Date().toISOString(),
       });
 
       toast.success("Product created successfully");
@@ -123,11 +126,11 @@ const CreateProductPage = () => {
           <div className="flex justify-between gap-x-4">
             <Input
               {...register("refund")}
-              label="Product Price"
+              label="Product Refund"
               placeholder="Enter the refund value for recycling this product"
               error={errors.refund?.message}
-              type="number"
               necessary
+              onInput={onInputRefund}
             />
             <Input
               {...register("nature_point")}

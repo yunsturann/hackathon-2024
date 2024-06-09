@@ -6,9 +6,7 @@ import { create } from "zustand";
 export interface User {
   company_email: string;
   company_phone: string;
-  confirmPassword: string;
   id: string;
-  password: string;
   supervisor_name: string;
   supervisor_surname: string;
   user_type: USER_TYPE;
@@ -18,6 +16,7 @@ interface UserStore {
   user: User | null;
   isLoading: boolean;
   fetchUser: (uid: string) => void;
+  setUser: (value: User | null) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
@@ -46,4 +45,5 @@ export const useUserStore = create<UserStore>((set) => ({
       return set({ user: null, isLoading: false });
     }
   },
+  setUser: (value) => set({ user: value, isLoading: false }),
 }));

@@ -16,6 +16,7 @@ import { USER_TYPE } from "@/types/enums";
 const schema = yup.object().shape({
   supervisor_name: yup.string().required("Name is required"),
   supervisor_surname: yup.string().required("Surname is required"),
+  company_name: yup.string().required("Company name is required"),
   company_email: yup
     .string()
     .email("Email is not valid")
@@ -39,6 +40,7 @@ type TRegisterForm = yup.InferType<typeof schema>;
 const initialValues: TRegisterForm = {
   supervisor_name: "",
   supervisor_surname: "",
+  company_name: "",
   company_email: "",
   company_phone: "",
   password: "",
@@ -92,7 +94,6 @@ const Register = () => {
           <Input
             {...register("supervisor_name")}
             label="Supervisor Name"
-            type="text"
             error={errors.supervisor_name?.message}
             necessary
             maxLength={50}
@@ -100,17 +101,23 @@ const Register = () => {
           <Input
             {...register("supervisor_surname")}
             label="Supervisor Surname"
-            type="text"
             error={errors.supervisor_surname?.message}
             necessary
             maxLength={50}
           />
         </div>
+        {/* Company NAME */}
+        <Input
+          {...register("company_name")}
+          label="Company Name"
+          error={errors.company_name?.message}
+          necessary
+          maxLength={50}
+        />
         {/* Phone */}
         <Input
           {...register("company_phone")}
           label="Company Phone"
-          type="text"
           error={errors.company_phone?.message}
           necessary
           onInput={onInputFormatPhoneNumber}

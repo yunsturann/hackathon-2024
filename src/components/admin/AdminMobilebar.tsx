@@ -5,11 +5,15 @@ import Logo from "../shared/Logo";
 import Button from "../ui/Button";
 import { auth } from "@/config/firebase";
 import toast from "react-hot-toast";
+import { useUserStore } from "@/store/use-user-store";
 
 const AdminMobileBar = () => {
+  const setUser = useUserStore((state) => state.setUser);
+
   const handleLogout = async () => {
     try {
       await auth.signOut();
+      setUser(null);
       toast.success("Logged out successfully");
     } catch (error) {
       toast.error((error as Error).message);

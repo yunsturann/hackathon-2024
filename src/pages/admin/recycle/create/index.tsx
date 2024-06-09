@@ -38,22 +38,22 @@ const schema = yup.object().shape({
 export type RecyclingPointForm = yup.InferType<typeof schema>;
 
 const AdminPage = () => {
-  const [categories, setCategories] = useState(multipleCategoryItems);
+  const [categories, setCategories] = useState(
+    Array.from(multipleCategoryItems)
+  );
 
   const {
     register,
     handleSubmit,
     reset,
     setValue,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<RecyclingPointForm>({
     resolver: yupResolver(schema),
     defaultValues: {
       title: "",
-      lat: 0,
-      lng: 0,
       address: "",
-      capacity: 0,
       phone: "",
       categories: [],
       type: true,
@@ -61,6 +61,20 @@ const AdminPage = () => {
   });
 
   const handleCreatePoint = async (data: RecyclingPointForm) => {
+    let count = 0;
+    categories.forEach((category) => {
+      if (category.isActive) {
+        count++;
+      }
+    });
+    if (count === 0) {
+      setError("categories", {
+        type: "required",
+        message: "Categories is required",
+      });
+      return;
+    }
+
     const collectionRef = collection(db, "recycling_point");
 
     try {

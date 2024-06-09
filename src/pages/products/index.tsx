@@ -1,4 +1,4 @@
-import ProductTable from "@/components/homepage/ProductTable";
+import ProductTable from "@/components/recycle/ProductTable";
 import Container from "@/components/shared/Container";
 import React, { Suspense } from "react";
 

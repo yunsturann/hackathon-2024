@@ -11,6 +11,7 @@ export interface IProduct {
   image: string;
   decomposition_year: number;
   recycling_rate: number;
+  created_at: string;
 }
 
 export interface IRecyclingPoint {

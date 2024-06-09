@@ -8,14 +8,18 @@ import toast from "react-hot-toast";
 import NavItem from "../shared/sidebar/NavItem";
 import { FaHome, FaRecycle } from "react-icons/fa";
 import { IoAddOutline } from "react-icons/io5";
+import { useUserStore } from "@/store/use-user-store";
 
 const AdminSidebar = () => {
+  const setUser = useUserStore((state) => state.setUser);
+
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
 
   const handleLogout = async () => {
     try {
       await auth.signOut();
       toast.success("Logged out successfully");
+      setUser(null);
     } catch (error) {
       toast.error((error as Error).message);
     }
@@ -31,7 +35,7 @@ const AdminSidebar = () => {
           <NavItem href="/admin" title="Home" Icon={<FaHome />} />
           <NavItem
             href="/admin/recycle"
-            title="Create Point"
+            title="Recycle Points"
             Icon={<FaRecycle />}
           />
           <NavItem
